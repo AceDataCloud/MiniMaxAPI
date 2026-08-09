@@ -1,6 +1,6 @@
 # MiniMax H3 API
 
-Generate 4–15 second videos from text, one to nine reference images, or one to three audio references through AceDataCloud.
+Generate 4–15 second videos from text, first/last frames, and multimodal references through AceDataCloud.
 
 MCP integration: [MiniMax H3 MCP](https://github.com/AceDataCloud/MinimaxMCP).
 
@@ -18,12 +18,16 @@ curl -X POST https://api.acedata.cloud/minimax/videos \
   -H "Authorization: Bearer $ACEDATACLOUD_API_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "minimax-h3",
-    "prompt": "A red fox running through a snowy forest at dawn, low tracking shot",
-    "resolution": "768P",
+    "model": "MiniMax-H3",
+    "content": [
+      {
+        "type": "text",
+        "text": "A red fox running through a snowy forest at dawn, low tracking shot"
+      }
+    ],
+    "resolution": "2K",
     "ratio": "16:9",
-    "duration": 4,
-    "async": true
+    "duration": 4
   }'
 ```
 
@@ -36,17 +40,7 @@ curl -X POST https://api.acedata.cloud/minimax/tasks \
   -d '{"action":"retrieve","id":"TASK_ID"}'
 ```
 
-## Modes
-
-The API does not accept `action`. It infers the mode:
-
-1. `audio_urls` present with images → audio-guided video
-2. otherwise `image_urls` present → image-to-video
-3. otherwise prompt-only → text-to-video
-
-`prompt` is required in every mode; audio requires at least one image.
-
-Public pricing is **$0.057143/s for 768P** and **$0.091429/s for 2K** on the largest package. Failed tasks are not charged.
+The API uses a `content` array for the required text prompt and optional image, video, and audio references. Poll the task about every 10 seconds until it reaches a terminal status.
 
 - [Video generation guide](docs/videos.md)
 - [Task API guide](docs/tasks.md)

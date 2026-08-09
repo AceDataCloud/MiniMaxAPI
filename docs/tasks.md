@@ -20,7 +20,7 @@
 }
 ```
 
-The response contains `items` and `count`. Poll approximately every five seconds until the stored `response` contains a successful result or an error.
+The response is `{ "task": {...} }`. Poll approximately every 10 seconds until `task.status` is `succeeded`, `failed`, or `cancelled`. On success, read the generated video from `task.content.url`.
 
 ## Delete a task record
 
@@ -31,4 +31,14 @@ The response contains `items` and `count`. Poll approximately every five seconds
 }
 ```
 
-Deletion removes the stored task record only. It does not cancel a generation already in progress.
+Batch retrieval accepts optional `ids`, `limit`, `offset`, `created_at_min`, and `created_at_max`. Its response contains `items` and `total`.
+
+Deletion is state-dependent:
+
+| Current status | Result |
+| --- | --- |
+| `queued` | Cancels the task |
+| `succeeded` or `failed` | Deletes the task record |
+| `running` or `cancelled` | Returns an error |
+
+A successful deletion response is `{ "id": "TASK_ID", "deleted": true }`.
