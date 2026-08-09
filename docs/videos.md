@@ -12,7 +12,6 @@
 | `audio_urls` | string[] | — | 1–3 public HTTP(S) URLs |
 | `resolution` | string | `2K` | `768P` or `2K` |
 | `ratio` | string | `16:9` | `16:9` or `9:16` |
-| `aigc_watermark` | boolean | false | add an AIGC watermark |
 | `duration` | integer | 4 | 4–15 |
 | `async` | boolean | false | return task ID immediately |
 | `callback_url` | string | — | public HTTP(S) webhook |
