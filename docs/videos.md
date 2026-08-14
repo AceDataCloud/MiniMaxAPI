@@ -1,5 +1,7 @@
 # Video Generation
 
+Creation is always asynchronous: save the returned `task_id`, then poll `/minimax/tasks` or use `callback_url`.
+
 ## Request
 
 `POST https://api.acedata.cloud/minimax/videos`
@@ -13,7 +15,7 @@
 | `ratio` | string | `adaptive` | `adaptive`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, or `9:16` |
 | `callback_url` | string | — | public HTTP(S) webhook |
 
-The API does not accept legacy `prompt`, `image_urls`, `audio_urls`, `messages`, `first_frame_image`, or `async` fields.
+The API does not accept legacy `prompt`, `image_urls`, `audio_urls`, `messages`, or `first_frame_image` fields. The optional `async` field is retained for compatibility, but creation is always asynchronous.
 
 ## Content items
 

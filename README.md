@@ -1,5 +1,7 @@
 # MiniMax H3 API
 
+Creation is always asynchronous: save the returned `task_id`, then poll `/minimax/tasks` or use `callback_url`.
+
 Generate 4–15 second videos from text, first/last frames, and multimodal references through AceDataCloud.
 
 MCP integration: [MiniMax H3 MCP](https://github.com/AceDataCloud/MinimaxMCP).
