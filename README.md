@@ -1,6 +1,6 @@
 # MiniMax H3 API
 
-Creation is always asynchronous: save the returned `task_id`, then poll `/minimax/tasks` or use `callback_url`.
+Generation waits for completion by default. Send `async=true` or `callback_url` to receive a `task_id`, then poll `/minimax/tasks`. The published model is `MiniMax-H3`; H3 Max, prompt enhancement and regeneration are not published.
 
 Generate 4–15 second videos from text, first/last frames, and multimodal references through AceDataCloud.
 
@@ -29,7 +29,8 @@ curl -X POST https://api.acedata.cloud/minimax/videos \
     ],
     "resolution": "2K",
     "ratio": "16:9",
-    "duration": 4
+    "duration": 4,
+    "async": true
   }'
 ```
 
