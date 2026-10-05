@@ -6,6 +6,8 @@ Generate 4–15 second videos from text, first/last frames, and multimodal refer
 
 MCP integration: [MiniMax H3 MCP](https://github.com/AceDataCloud/MinimaxMCP).
 
+The MCP supports `MiniMax-H3` at `768P` or `2K`, using text, reference images, or audio. After generation returns a task ID, keep querying the task until its status is `succeeded`, `failed`, or `cancelled`. Only use `task.content.url` after `succeeded`; for failure or cancellation, inspect the task's error information. Receiving a task ID does not mean the video is ready. See the [task retrieval procedure](docs/tasks.md).
+
 ## Endpoints
 
 | Method | Path | Purpose |
